@@ -1,16 +1,12 @@
 <template>
+	<!-- 主页的搭建 -->
   <div class="app-container">
-
     <!-- 顶部 Header 区域 -->
     <mt-header fixed title="Vue项目"></mt-header>
-
-
     <!-- 中间的 路由 router-view 区域 -->
 		<transition>
 			<router-view></router-view>
 		</transition>
-
-
     <!-- 底部 Tabbar 区域 -->
     <nav class="mui-bar mui-bar-tab">
 			<router-link class="mui-tab-item" to="/home">
@@ -32,7 +28,6 @@
 				<span class="mui-tab-label">搜索</span>
 			</router-link>
 		</nav>
-
   </div>
 </template>
 
@@ -41,11 +36,12 @@
 
 
 <style lang="scss" scoped>
+// 添加顶部区域和中间路由区域的距离
 .app-container {
   padding-top: 40px;
   overflow-x: hidden;
 }
-
+// 添加页面切换动画
 .v-enter {
   opacity: 0;
   transform: translateX(100%);
