@@ -19,16 +19,18 @@ import './lib/mui/css/mui.min.css'
 // 导入扩展图标样式
 import './lib/mui/css/icons-extra.css'
 
+// 导入 Mint-UI的全部组件和样式
+import MintUI from 'mint-ui'
+Vue.use(MintUI)
+import 'mint-ui/lib/style.css'
 
-// 按需导入 Mint-UI 中的组件   
-import { Header, Swipe, SwipeItem, Button} from 'mint-ui'
-Vue.component(Header.name, Header)
-Vue.component(Swipe.name, Swipe)
-Vue.component(SwipeItem.name, SwipeItem)
-Vue.component(Button.name,Button)
 
 // 导入 App 根组件
 import app from './App.vue'
+
+//导入VuePreview缩略图插件
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview) 
 
 // 设置请求的根路径
 Vue.http.options.root = 'http://www.liulongbin.top:3005';
