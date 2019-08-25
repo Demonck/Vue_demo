@@ -68,7 +68,7 @@ export default {
         // 发表评论
         // 参数1： 请求的URL地址
         // 参数2： 提交给服务器的数据对象 { content: this.msg }
-        // 参数3： 定义提交时候，表单中数据的格式  { emulateJSON:true }，已在main中全局设置
+        // 参数3： 定义提交时候，表单中数据的格式  { emulateJSON:true }，已在main中全局设置省略
         this.$http
           .post("api/postcomment/" + this.id, {
             //评论内容
