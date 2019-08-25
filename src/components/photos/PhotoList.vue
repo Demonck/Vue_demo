@@ -10,6 +10,7 @@
           :class="['mui-control-item', item.id == 0 ?'mui-active':'']"
           v-for="item in cates"
           :key="item.id"
+          @click="getPhotoListByCateId(item.id)"
         >{{ item.title }}</a>
       </div>
     </div>
@@ -36,12 +37,12 @@ export default {
   data() {
     return {
       cates: [], //图片分类数据数组
-      list: [] //图片列表数据数组
+      list: [], //图片列表数据数组 
     };
   },
   created() {
     this.getAllCategory();
-    // 默认进入页面，就主动请求 所有图片列表的数据
+    // 默认进入页面，就主动请求 全部分类的图片列表的数据
     this.getPhotoListByCateId(0);
   },
   mounted() {
@@ -68,11 +69,13 @@ export default {
       });
     },
     getPhotoListByCateId(cateId) {
+      
       // 根据 分类Id，获取图片列表
       this.$http.get("api/getimages/" + cateId).then(result => {
         if (result.body.status === 0) {
+          
           this.list = result.body.message;
-          Toast("加载图片列表成功！");
+          Toast("加载图片列表成功！item.id:" +cateId);
         } else {
           Toast("加载图片列表失败！");
         }
