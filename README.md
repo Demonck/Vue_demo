@@ -1,4 +1,63 @@
-# 这是一个Vue初始项目
+## vue_demo 项目记录
+
+### 初始化项目配置
++ `npm init -y` 使用默认初始化
++ `npm init`    自定义初始化
++ `npm i` 安装包(根据package.json)
++ npm命令
+    + npm install xxx 安装模块如不指定版本号，默认会安装最新的版本，安装但不写入package.json
+    + npm install xxx 0.0.1 安装指定版本的模块
+    + npm install --save xxx 安装并把模块的版本信息保存到dependencies（生产环境依赖）中，即你的package.json文件的dependencies字段中
+    + npm install --global xxx 全局安装
+    + npm install --save-dev xxx  安装并把模块版本信息保存到devDependencies（开发环境依赖）中，即你的package.json文件的devDependencies字段中
+    + npm install --save-optional xxx  安装并把模块安装到optionalDependencies（可选环境依赖）中，即你的package.json文件的optionalDependencies字段中
+    + npm install --save-exact xxx  精确的安装指定版本的模块，dependencies字段里每个模块版本号前面的^会取消掉
+
++ npm 常用命令
+    + --save相当于-s，--global相当于-g，--save-dev相当于-d，--save-optional相当于-o，--save-exact相当于-e。
+需要注意的是，我们在安装第三方包的时候通常会用到-s、-g、-d后缀，其他的很少用到。
+    + npm i XX -S 写入dependencies 开发环境
+    + npm i XX -D 写入devDependencies 生产环境
+    + npm i XX -g 全局安装
++ dependencies 开发环境 devDependencies 生产环境 区别
+    + devDependencies 节点下的模块是我们在开发时需要用的，比如项目中使用的 gulp ，压缩css、js的模块。这些模块在我们的项目部署后是不需要的，所以我们可以使用 -save-dev(-D) 的形式安装。
+    + 像 express 这些模块是项目运行必备的，应该安装在 dependencies 节点下，所以我们应该使用 -save(-S)的形式安装。
+
+
+### 升级最新npm包
+https://www.jianshu.com/p/a33702a4b096
++ 使用npm-check
+    + npm-check是用来检查npm依赖包是否有更新，错误以及不在使用的，我们也可以使用npm-check进行包的更新。
+    + 安装`npm install -g npm-check`
+    + 检查npm包的状态(全局)`npm-check -u -g`
+    + 检查npm包的状态(局部)`npm-check -u`
+    + 通过上下键可以移动光标，使用空格键可以选择需要处理的包，回车直接进行处理。
+### 制作初始模板配置项目，上传github
++ 使用的是win7虚拟机
+```
+git init
+git config --global user.name "Demonck"
+git config --global user.email "953432964@qq.com"
+```
++ 生成秘钥
+
+```
+ssh-keygen -t rsa -C "953432964@qq.com"
+```
++ 在github配置秘钥
+C:\Users\Dickesin\.ssh
++ 把代码存储到.git仓储中
+```
+git add ./
+git commit -m "这是对这次添加的东西的说明"
+```
+
++ 把项目推送到github上
+```
+git push git@github.com:Demonck/Vue_demo_template.git master
+git@github.com:Demonck/Vue_demo.git
+```
+
 
 ## 开始项目
 
@@ -9,6 +68,8 @@
 2. git commit -m "提交信息"
 3. git push
 
+
+---
 
 # 主页面
 ## 制作首页App组件
@@ -44,6 +105,8 @@
 1. 使用MUI的九宫格样式，改造成六宫格
 2. 添加router-link
 
+---
+
 # 新闻页
 ## 改造 新闻资讯 路由链接
 1. 创建新闻组件  
@@ -65,6 +128,8 @@
 ## 实现 新闻详情 的 页面布局 和数据渲染
 1. 创建新闻详情页布局，新闻标题主标题-时间点击信息副标题-新闻内容html区-评论子组件区
 2. 创建评论组件，在新闻详情页导入评论子组件，注册子组件，通过父组件向子组件传递新闻id值
+
+---
 
 # 评论组件
 ## 单独封装一个 comment.vue 评论子组件
@@ -96,6 +161,8 @@
     + 参数1： 请求的URL地址
     + 参数2： 提交给服务器的数据对象 { content: this.msg }
     + 参数3： 定义提交时候，表单中数据的格式  { emulateJSON:true }，已在main中全局设置省略
+
+---
 
 # 图片分享页
 ## 改造 图片分享按钮 为路由的链接并显示对应的组件页面
@@ -174,6 +241,8 @@
 
 
 
+---
+
 # 商品页
 ## 创建商品列表组件
 1. 创建商品列表组件，并注册路由
@@ -229,3 +298,41 @@
 1. 创建图文介绍和商品评论的组件
 2. 导入组件，注册路由规则
 3. 实现图片介绍和视频评论组件的内容
+
+---
+
+
+# 实现购物车添加商品小球动画效果
+## 实现基本的加入购物车小球
+1. 使用ccs3绘制小球，为小球添加半场动画
+2. 设置cubic-bezier控制变化 https://cubic-bezier.com/#.17,1.13,.88,.62
+3. 关于cubic-bezier https://www.jianshu.com/p/99084dd0abf2
+4. 在加入购物车上添加点击事件
+
+## 完美实现小球动画适配不同页面大小和页面滚动问题
+小球动画优化思路：
+ 1. 先分析导致 动画 不准确的原因：把 小球 最终位移到的位置，已经局限在了某一分辨率下的滚动条未滚动的情况下；
+2. 只要分辨率和 测试的时候不一样，或者滚动条有一定的滚动距离之后， 问题就出现了；
+3. 因此，经过分析，得到结论： 不能把位置的横纵坐标直接写死了而是应该 根据不同情况，动态计算这个坐标值；
+4. 经过分析，得出解题思路： 先得到购物车徽标的横纵 坐标再得到小球的横纵坐标，然后让 y 值 求差， x 值也求 差，得到 的结果，就是横纵坐标要位移的距离
+5. 使用 domObject.getBoundingClientRect() 获取小球的位置
+6. 为购物车徽标添加id，通过操作dom元素，可以得到位置
+7. es6语法-模板对象 `${}` 拼接字符串和变量
+
+
+
+## 每当商品数量numbox的值改变立即，把值给购物车要加入的值
+分析：如何实现加入购物车时候，拿到选择的数量 
+1. 经过分析发现： 按钮属于 goodsinfo 页面， 数字 属于 numberbox 组件
+2. 由于涉及到了父子组件的嵌套了，所以，无法直接在 goodsinfo 页面中获取到 选中的商品数量值
+3. 怎么解决这个问题：涉及到了 子组件向父组件传值了（事件调用机制） 
+4. 事件调用的本质： 父向子传递方法，子调用这个方法， 同时把 数据当作参数 传递给这个方法 
+
+
+## 使用JS的API设置numbox的最大值max
+1. 基本思路：通过父组件向子组件传值(商品数量)，子组件得到商品数量的值赋值给numbox中的max
+2. 但是，由于商品数量的请求是异步的操作，所以在页面渲染的时候，会出现传递商品数量的值的时候，请求的数据还没有完成，导致传递的值为undefined，max为undefined，所以无效果
+3. 解决思路：我们不知道什么时候能够拿到 max 值，但是，总归有一刻，会得到一个真正的 max 值
+4. 因此使用使用 watch 属性监听，来 监听 父组件传递过来的 max 值，不管 watch 会被触发几次，但是，最后一次，肯定是一个 合法的 max 数值
+5. 不使用标签的属性来设置最大值，通过js的api来操作最大值
+

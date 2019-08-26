@@ -24,6 +24,7 @@
 </template>
 <script>
 import { Toast } from "mint-ui";
+
 export default {
   data() {
     // data 是往自己组件内部，挂载一些私有数据的
@@ -50,12 +51,12 @@ export default {
           }
         });
     },
-    //加载更多
+    //加载更多功能
     getMore() {
       this.pageindex++;
       this.getGoodsList();
     },
-    //商品详情页跳转
+    //商品详情页跳转-使用编程式路由跳转
     goDetail(id) {
       // 1. 最简单的
       // this.$router.push("/home/goodsinfo/" + id);

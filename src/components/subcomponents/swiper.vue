@@ -1,10 +1,11 @@
+// 轮播图组件
 <template>
   <div>
     <mt-swipe :auto="4000">
       <!-- 在组件中，使用v-for循环的话，一定要使用 key -->
       <!-- 将来，谁使用此 轮播图组件，谁为我们传递 lunbotuList -->
       <!-- 此时，lunbotuList 应该是 父组件向子组件传值来设置 -->
-      <mt-swipe-item v-for="item in lunbotuList" :key="item.url">
+      <mt-swipe-item v-for="item in lunbotuList" :key="item.img">
         <img :src="item.img" alt="" :class="{'full': isfull}">
       </mt-swipe-item>
     </mt-swipe>
@@ -21,6 +22,7 @@
 
 <script>
 export default {
+  // 父组件向子组件传值，子组件通过设置props接收
   props: ["lunbotuList", "isfull"]
 };
 </script>
@@ -38,7 +40,8 @@ export default {
     }
   }
 }
-
+// 通过设置isfull的值，来有选择的使用.full的样式
+// 在主页面，需要轮播图片宽度100%填充，而在商品详情页，不需要需要轮播图宽度100%显示
 .full {
   width: 100%;
 }

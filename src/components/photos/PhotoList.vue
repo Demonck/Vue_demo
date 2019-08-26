@@ -1,3 +1,4 @@
+// 图片详情组件
 <template >
   <div id="slider" class="mui-slider">
     <!-- 顶部滑动条区域 -->
@@ -37,7 +38,7 @@ export default {
   data() {
     return {
       cates: [], //图片分类数据数组
-      list: [], //图片列表数据数组 
+      list: [] //图片列表数据数组
     };
   },
   created() {
@@ -69,13 +70,11 @@ export default {
       });
     },
     getPhotoListByCateId(cateId) {
-      
       // 根据 分类Id，获取图片列表
       this.$http.get("api/getimages/" + cateId).then(result => {
         if (result.body.status === 0) {
-          
           this.list = result.body.message;
-          Toast("加载图片列表成功！item.id:" +cateId);
+          Toast("加载图片列表成功！item.id:" + cateId);
         } else {
           Toast("加载图片列表失败！");
         }

@@ -1,3 +1,4 @@
+// 图片列表组件
 <template>
   <div class="photoinfo-container">
     <!-- 图片详情标题 -->

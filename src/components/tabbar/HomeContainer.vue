@@ -1,8 +1,9 @@
+// 主页组件
 <template>
   <div>
     <!-- 轮播图区域 -->
     <swiper :lunbotuList="lunbotuList" :isfull="true"></swiper>
-    <!-- 九宫格 到 六宫格图标 的改造工程 -->
+    <!-- 六宫格图标 通过九宫格改造 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <router-link to="/home/newslist">
