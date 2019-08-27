@@ -110,7 +110,19 @@ export default {
     // 添加到购物车
     addToShopCar() {
       this.ballFlag = !this.ballFlag;
+      // 创建一个加入购物车的商品的信息的对象
+      // { id:商品的id, count: 要购买的数量, price: 商品的单价，selected: false  }
+      var goodsinfo = {
+        id: this.id,
+        count: this.selectedCount,
+        price: this.goodsinfo.sell_price,
+        selected: true
+      };
+      // 调用vuex的store中的添加商品方法
+      this.$store.commit("addToCar",goodsinfo);
+      
     },
+    // 小球动画
     beforeEnter(el) {
       el.style.transform = "translate(0, 0)";
     },
