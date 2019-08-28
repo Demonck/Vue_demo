@@ -6,7 +6,10 @@
       <div class="mui-card" v-for="(item,i) in goodslist" :key="item.id">
         <div class="mui-card-content">
           <div class="mui-card-content-inner">
-            <mt-switch></mt-switch>
+            <mt-switch
+              v-model="$store.getters.getGoodsSelected[item.id]"
+              @change="selectedChanged(item.id,$store.getters.getGoodsSelected[item.id])"
+            ></mt-switch>
             <img :src="item.thumb_path" />
             <div class="info">
               <h1>{{item.title}}</h1>
@@ -24,7 +27,19 @@
     <!-- 商品价格结算区域 -->
     <div class="mui-card">
       <div class="mui-card-content">
-        <div class="mui-card-content-inner">这是一个最简单的卡片视图控件；卡片视图常用来显示完整独立的一段信息，比如一篇文章的预览图、作者信息、点赞数量等</div>
+        <div class="mui-card-content-inner jiesuan">
+          <div class="left">
+            <p>总计（不含运费）</p>
+            <p>
+              <span class="red">
+                 已勾选商品 {{$store.getters.getGoodsCountAndMoney.count}}
+                件，总价: ￥{{$store.getters.getGoodsCountAndMoney.money}}
+                <span class="red"></span>
+              </span>
+            </p>
+          </div>
+          <mt-button type="danger">去结算</mt-button>
+        </div>
       </div>
     </div>
   </div>
@@ -44,6 +59,7 @@ export default {
     this.getGoodsList();
   },
   methods: {
+    // 获取商品列表
     getGoodsList() {
       // 创建一个存放购物车商品id的数组
       var idArr = [];
@@ -64,10 +80,17 @@ export default {
           });
       }
     },
+    // 删除购物车商品
     remove(id, index) {
       // 点击删除，把商品从 store 中根据 传递的 Id 删除，同时，把 当前组件中的 goodslist 中，对应要删除的那个商品，使用 index 来删除
       this.goodslist.splice(index, 1);
       this.$store.commit("removeFormCar", id);
+    },
+    // 购物车商品选择状态
+    selectedChanged(id, val) {
+      // 每当点击开关，把最新的状态，同步到 store 中
+      //console.log(val)
+      this.$store.commit("updateGoodsSelected", { id, selected: val });
     }
   },
   components: {
@@ -80,6 +103,7 @@ export default {
 .shopcar-container {
   background-color: #eee;
   overflow: hidden;
+  // 购物车商品区
   .goods-list {
     .mui-card-content-inner {
       display: flex;
@@ -100,6 +124,17 @@ export default {
         color: red;
         font-weight: bold;
       }
+    }
+  }
+  // 结算区
+  .jiesuan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .red {
+      color: red;
+      font-weight: bold;
+      font-size: 16px;
     }
   }
 }

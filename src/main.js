@@ -89,13 +89,14 @@ var store = new Vuex.Store({
     updateGoodsInfo(state, goodsinfo) {
       state.car.some(item => {
         if (item.id == goodsinfo.id) {
-          item.count = parseInt(goodsinfo.count) ;
+          item.count = parseInt(goodsinfo.count);
           return true;
         }
       })
       // 当更新car之后，把car数组，存储本地的 localStorage中
       localStorage.setItem('car', JSON.stringify(state.car))
     },
+    // 删除购物车商品
     removeFormCar(state, id) {
       // 根据Id，从store 中的购物车中删除对应的那条商品数据
       state.car.some((item, i) => {
@@ -105,6 +106,15 @@ var store = new Vuex.Store({
         }
       })
       // 将删除完毕后的，最新的购物车数据，同步到 本地存储中
+      localStorage.setItem('car', JSON.stringify(state.car))
+    },
+    // 更新购物车商品选择状态
+    updateGoodsSelected(state, info) {
+      state.car.forEach(item => {
+        if (item.id == info.id) {
+          item.selected = info.selected;
+        }
+      })
       localStorage.setItem('car', JSON.stringify(state.car))
     }
   },
@@ -117,6 +127,7 @@ var store = new Vuex.Store({
       })
       return c
     },
+    // 获取单个商品数量
     getGoodsCount(state) {
       var o = {};
       state.car.forEach(item => {
@@ -124,6 +135,28 @@ var store = new Vuex.Store({
       })
       return o;
 
+    },
+    // 获取商品选择情况
+    getGoodsSelected(state) {
+      var o = {};
+      state.car.forEach(item => {
+        o[item.id] = item.selected;
+      })
+      return o;
+    },
+    // 计算商品数量和总价格
+    getGoodsCountAndMoney(state) {
+      var o = {
+        count: 0, // 勾选的数量
+        money: 0 // 勾选的总价
+      }
+      state.car.forEach(item => {
+        if (item.selected ) {
+          o.count += item.count;
+          o.money += item.price * item.count;
+        }
+      })
+      return o;
     }
   }
 })
