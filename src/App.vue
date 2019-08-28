@@ -2,7 +2,13 @@
   <!-- 主页的搭建 -->
   <div class="app-container">
     <!-- 顶部 Header 区域 -->
-    <mt-header fixed title="Vue项目"></mt-header>
+    <mt-header fixed title="Vue项目">
+      <router-link to="/" slot="left">
+        <span @click="back" v-show="flag">
+          <mt-button icon="back">返回</mt-button>
+        </span>
+      </router-link>
+    </mt-header>
     <!-- 中间的 路由 router-view 区域 -->
     <transition>
       <router-view></router-view>
@@ -33,12 +39,35 @@
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      flag: false //返回按钮显示隐藏标识符
+    };
+  },
+  methods: {
+    // 返回事件
+    back() {
+      this.$router.go(-1);
+    }
+  },
+  // 监听路由地址是否为home主页
+  watch: {
+    "$route.path": function(newVal) {
+      if (newVal == "/home") {
+        this.flag = false;
+      } else {
+        this.flag = true;
+      }
+    }
+  }
+};
 </script>
 
 
 <style lang="scss" scoped>
 //添加顶部标题条的z轴距离，使图片列表不滑动时不会遮挡
-.mint-header{
+.mint-header {
   z-index: 99;
 }
 // 添加顶部区域和中间路由区域的距离
