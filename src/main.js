@@ -30,7 +30,7 @@ import app from './App.vue'
 import VuePreview from 'vue-preview'
 Vue.use(VuePreview)
 
-// 设置请求的根路径
+// 设置api请求的根路径
 Vue.http.options.root = 'http://www.liulongbin.top:3005';
 // 全局设置 post 时候表单数据格式组织形式   application/x-www-form-urlencoded
 Vue.http.options.emulateJSON = true;
@@ -42,13 +42,14 @@ Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
   return moment(dataStr).format(pattern)
 })
 
-// 注册 vuex
+// 导入并注册 vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // 创建car数组，进入网站，先从本地存储中，把购物车的数据读出来，放到 store 中
 var car = JSON.parse(localStorage.getItem('car') || '[]');
 
+// 创建store状态管理对象
 var store = new Vuex.Store({
   state: {// this.$store.state.***
     //购物车商品的数据，用数组存储起来，在car数组中存储商品的对象 
@@ -165,5 +166,5 @@ var vm = new Vue({
   el: '#app',
   render: c => c(app),
   router, // 1.4 挂载路由对象到 VM 实例上
-  store // 挂载 store 对象
+  store // 挂载 store 状态管理对象
 })

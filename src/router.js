@@ -5,6 +5,7 @@ import HomeContainer from './components/tabbar/HomeContainer.vue'
 import MemberContainer from './components/tabbar/MemberContainer.vue'
 import ShopcarContainer from './components/tabbar/ShopcarContainer.vue'
 import SearchContainer from './components/tabbar/SearchContainer.vue'
+
 // 新闻页
 import NewsList from './components/news/NewsList.vue'
 import NewInfo from './components/news/NesListInfo.vue'
@@ -19,7 +20,7 @@ import GoodsDesc from './components/goods/GoodsDesc.vue'
 // 商品评论
 import GoodsComment from './components/goods/GoodsComment.vue'
 
-// 3. 创建路由对象
+//  创建路由对象
 var router = new VueRouter({
   routes: [ // 配置路由规则
     { path: '/', redirect: '/home' },
@@ -32,6 +33,7 @@ var router = new VueRouter({
     { path: '/home/photolist', component: PhotoList },
     { path: '/home/photoinfo/:id', component: PhotoInfo },
     { path: '/home/goodslist', component: GoodsList, },
+    // 使用编程式路由跳转，创建name属性
     { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo' },
     { path: '/home/goodsdesc/:id', component:GoodsDesc, name: 'goodsdesc'  },
     { path: '/home/goodscomment/:id', component: GoodsComment, name: 'goodscomment' }

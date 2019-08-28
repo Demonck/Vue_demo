@@ -401,5 +401,28 @@ vuex 是 Vue 配套的 公共数据管理工具，它可以把一些共享的数
 4. 通过item.id来删除vuex-car的数据
 5. remove方法的两个参数item.id , i
 
+## 绘制结算区域样式
+
+
+## 把store中选中的状态同步到页面上
+1. 在vuex-getters中定义一个 getGoodsSelected方法，循环car数据创建一个对象{id：selected}
+2. 在购物车页面的mt-switch标签绑定一个数据
+
+## 同步商品的勾选状态到store中保存
+1. 使用mt-switch标签中的change事件，调用一个方法
+2. 每当点击开关，把最新的状态，同步到 store 中
+3. 在vuex-mutations中定义一个改变选择的属性值方法
+4. 在购物车页面使用vuex-mutations中定义的方法
+
+## 实现勾选数量和总价的自动计算
+1. 在vuex-getters中定义一个计算数量和计算价格的方法
+2. 实现计算功能和实时更新
+
+## 实现返回按钮的功能
+1. 使用Mint-UI中的返回(Header)
+2. 在返回按钮上绑定一个事件
+3. 使用watch来监听url地址是否为主页，使用v-show隐藏返回按钮
+4. 由于在页面刚加载的时候，没有路由的改变，所以无法实现返回按钮的隐藏
+5. 所以在生命周期的created中添加判断方法
 
 

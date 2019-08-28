@@ -52,6 +52,7 @@ export default {
 
 <style lang="scss" scoped>
 .mui-table-view {
+  
   li {
     // 新闻标题
     h1 {

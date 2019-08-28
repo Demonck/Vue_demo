@@ -3,11 +3,10 @@
   <div class="app-container">
     <!-- 顶部 Header 区域 -->
     <mt-header fixed title="Vue项目">
-      <router-link to="/" slot="left">
-        <span @click="back" v-show="flag">
-          <mt-button icon="back">返回</mt-button>
-        </span>
-      </router-link>
+      <!-- 返回按钮 -->
+      <span slot="left" @click="back" v-show="flag">
+        <mt-button icon="back">返回</mt-button>
+      </span>
     </mt-header>
     <!-- 中间的 路由 router-view 区域 -->
     <transition>

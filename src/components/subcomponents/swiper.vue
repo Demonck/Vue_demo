@@ -3,15 +3,15 @@
   <div>
     <mt-swipe :auto="4000">
       <!-- 在组件中，使用v-for循环的话，一定要使用 key -->
-      <!-- 将来，谁使用此 轮播图组件，谁为我们传递 lunbotuList -->
-      <!-- 此时，lunbotuList 应该是 父组件向子组件传值来设置 -->
+      <!-- 使用轮播图组件的传递轮播图数据lunbotuList -->
+      <!-- lunbotuList 为父组件向子组件传值来设置 -->
       <mt-swipe-item v-for="item in lunbotuList" :key="item.img">
         <img :src="item.img" alt="" :class="{'full': isfull}">
       </mt-swipe-item>
     </mt-swipe>
   </div>
 
-  <!-- 分析：为什么 商品评论中的 轮播图那么丑： -->
+  <!-- 分析：为什么 商品评论页面中的 轮播图那么丑： -->
   <!-- 1. 首页中的图片，它的宽和高，都是 使用了 100% 的宽度 -->
   <!-- 2. 在商品详情页面中，轮播图的 图片，如果也使用 宽高 为 100%的话，页面不好看 -->
   <!-- 3. 商品详情页面中的轮播图，期望 高度是 100%， 但是 宽度为 自适应 -->
@@ -28,6 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// 轮播图样式
 .mint-swipe {
   height: 200px;
 
