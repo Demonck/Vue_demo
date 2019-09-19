@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>MemberContainer</h3>
+    <h3>这是用户信息</h3>
   </div>
 </template>
 
